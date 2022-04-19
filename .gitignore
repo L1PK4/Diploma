@@ -125,4 +125,5 @@ dmypy.json
 
 # my ignores
 
+test*.py
 *.csv
