@@ -21,11 +21,11 @@ def get_approx(X, Y, delta=0.001):
     lamb = nodes(X, Y)
     Xc = interpolate.interp1d(lamb, X)
     Yc = interpolate.interp1d(lamb, Y)
-    t = 0
+    t = lamb[0]
     x = []
     y = []
     n = len(X)
-    while t < 2 * np.pi:
+    while t < lamb[-1]:
         x.append(Xc(t))
         y.append(Yc(t))
         t += delta
