@@ -1,6 +1,4 @@
-
 from math import cos, sin
-
 
 def convert(PHI, RO):
     X = []
