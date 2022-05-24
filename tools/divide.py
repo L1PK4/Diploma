@@ -1,6 +1,6 @@
 import numpy as np
 
-def divide_by_der2(data, thrashold = 1e-1):
+def divide_by_der2(data, thrashold = 3e1):
     turns = []
     indexes = []
     for i in range(1, len(data) - 1):

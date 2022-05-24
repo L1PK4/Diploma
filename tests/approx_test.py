@@ -5,6 +5,7 @@ sys.path.append("D:/programming/python/Diploma")
 from tools.decartes import convert
 from tools.divide import divide_by_der2 as divide
 from tools.node_make import nodes
+import numpy as np
 
 import time
 
@@ -14,8 +15,8 @@ import time
 # закл: в рез-те пров числ эксп доказано что наил пар-ей для этой задачи явл натур пар-ция контура которая механически соотв движ мат точки по этому контуру
 # без действия акт сил и силы трения. При этом Лагранжиан совп с кин. энергией а ур-е движение сост по принц макс лагр интегрируются и в рез-те пол-ся движ с пост по модулю скорости
 
-"data/data.csv"
-with open("ideal_data/data.csv", "rt") as f:
+"ideal_data/data.csv"
+with open("data/data.csv", "rt") as f:
     data = list(map(lambda x : list(map(float, x.strip('\n').split(', '))), f.readlines()))
 
 """
@@ -27,7 +28,7 @@ data = [
 ]
 """
 start = time.time()
-div, indexes = divide(data, thrashold=30)
+div, indexes = divide(data)
 end = time.time()
 print(f"Time for dividion: {end - start}")
 
@@ -51,9 +52,9 @@ for i in indexes:
     X, Y = convert(*list(zip(*seg)))
     ax.plot(X, Y)
     start = time.time()
-    X, Y = get_approx(X, Y)
+    X, Y, *c, res = get_approx(X, Y)
     end = time.time()
-    print(f"Time for approximation({n}): {end - start}")
+    print("-" * 30 + str(n) + "-" * 30 + f"\nTime for approximation: {end - start}\n\nmean res:{np.mean(res)}\n\ncoef:{c}\n")
     n += 1
 
     ax.plot(X, Y, linestyle='dashed')
