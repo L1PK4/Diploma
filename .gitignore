@@ -125,6 +125,8 @@ dmypy.json
 
 # my ignores
 
+tests
+res
 test*.py
 *.csv
 *.bat
