@@ -41,7 +41,6 @@ def main(args):
     last_i = 0
     fig, ax = plt.subplots()
     ax.plot(*convert(*list(zip(*div))), 'ro')
-    ax.plot(*convert(*list(zip(*data))), linestyle='dashed')
     ax.grid(True)
     n = 1
     RES = []
@@ -49,7 +48,9 @@ def main(args):
         segments.append(data[last_i : i])
         last_i = i
         seg = segments[-1]
-        # ax.plot(X, Y)
+        if len(seg) < 3:
+            continue
+        ax.plot(*convert(*list(zip(*seg))), color=(0, 0, 0), linewidth=0.5, linestyle='dashed')
         if args.full:
             start = time.time()
         X, Y, *c, res = approx(list(zip(*seg)), deg=args.degree)

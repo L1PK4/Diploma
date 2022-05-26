@@ -2,6 +2,14 @@ import numpy as np
 from tools.node_make import nodes
 from tools.decartes import convert
 
+def d(phi1, r1, phi2, r2):
+    x1 = r1 * np.cos(phi1)
+    y1 = r1 * np.sin(phi1)
+    x2 = r2 * np.cos(phi2)
+    y2 = r2 * np.sin(phi2)
+    return np.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+
+
 def get_approx_phi(seg, deg=1):
     PHI, R = seg
     cR = np.polyfit(PHI, R, deg)
@@ -10,7 +18,7 @@ def get_approx_phi(seg, deg=1):
     res = []
     for i, t in enumerate(PHI):
         r.append(pR(t))
-        res.append(np.abs(r[i] - R[i]))
+        res.append(d(PHI[i], r[i], PHI[i], R[i]))
     x, y = convert(PHI, r)
     return x, y, cR, res
 
